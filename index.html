@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shivangi Shukla — Data Analyst Portfolio</title>
+  <meta name="description" content="Data Analyst portfolio: projects, skills, resume & contact." />
+  <meta name="theme-color" content="#111827" />
+
+  <!-- Speed up Google Fonts handshake: -->
+  <!-- preconnect warms up DNS + TLS so fonts load faster on first paint -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b1220;          /* page background */
+      --bg-soft: #111827;     /* cards, header */
+      --text: #e5e7eb;        /* base text */
+      --muted: #9ca3af;       /* secondary text */
+      --accent: #7c3aed;      /* brand color */
+      --accent-2: #06b6d4;    /* secondary brand */
+      --card: #0f172a;
+      --border: #1f2937;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --radius: 16px;
+      --maxw: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.25), transparent 60%),
+                  radial-gradient(1200px 600px at 10% 0%, rgba(6,182,212,.2), transparent 60%),
+                  var(--bg);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(180%) blur(10px);
+      background: rgba(11,18,32, .65);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .5px; }
+    .brand .dot { width: 10px; height: 10px; border-radius: 999px; background: linear-gradient(45deg, var(--accent), var(--accent-2)); display: inline-block; }
+    nav a { color: var(--text); text-decoration: none; margin-left: 22px; font-weight: 600; opacity: .9; }
+    nav a:hover { opacity: 1; }
+
+    /* Mobile menu */
+    .menu-btn { display: none; background: none; border: 0; color: var(--text); font-size: 28px; }
+    .links { display: flex; align-items: center; }
+    @media (max-width: 860px) {
+      .menu-btn { display: block; }
+      .links { position: fixed; inset: 62px 0 auto 0; background: rgba(15,23,42,.98); border-bottom: 1px solid var(--border); transform: translateY(-120%); transition: transform .25s ease; flex-direction: column; align-items: flex-start; padding: 14px 20px; gap: 14px; }
+      .links.open { transform: translateY(0); }
+      nav a { margin: 6px 0; }
+    }
+
+    /* Sections */
+    section { padding: 80px 20px; }
+    .container { max-width: var(--maxw); margin: 0 auto; }
+    h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; }
+    h2 { font-size: clamp(26px, 3vw, 34px); }
+
+    /* Hero */
+    .hero { padding-top: 120px; padding-bottom: 120px; }
+    .hero-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+    .eyebrow { color: var(--accent-2); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+    .hero h1 { font-size: clamp(32px, 6vw, 54px); margin-top: 6px; }
+    .lead { color: var(--muted); font-size: clamp(16px, 2vw, 18px); }
+    .cta { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 999px; text-decoration: none; font-weight: 700; border: 1px solid transparent; box-shadow: var(--shadow); }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; }
+    .btn.ghost { background: transparent; border-color: var(--border); color: var(--text); box-shadow: none; }
+
+    .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .stat { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 10px; text-align: center; }
+    .stat strong { display: block; font-size: 20px; }
+    @media (max-width: 860px){ .hero-inner { grid-template-columns: 1fr; } }
+
+    /* About */
+    .about { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; }
+    .about .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+    .about ul { margin: 10px 0 0; padding: 0 0 0 18px; color: var(--muted); }
+    @media (max-width: 900px){ .about { grid-template-columns: 1fr; } }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .tag { font-size: 13px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background: rgba(124,58,237,.08); }
+    @media (max-width: 960px){ .skills-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px){ .skills-grid { grid-template-columns: 1fr; } }
+
+    /* Projects */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+    .project .thumb { width: 100%; height: 170px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(124,58,237,.15), rgba(6,182,212,.15)); border-bottom: 1px solid var(--border); }
+    .project .body { padding: 14px; }
+    .project .body p { color: var(--muted); margin: 6px 0 10px; }
+    .project .actions { margin-top: auto; padding: 0 14px 14px; display: flex; gap: 10px; }
+    @media (max-width: 1024px){ .projects-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 680px){ .projects-grid { grid-template-columns: 1fr; } }
+
+    /* Resume */
+    .resume { background: linear-gradient(180deg, rgba(124,58,237,.08), transparent 60%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .timeline { border-left: 2px dashed rgba(124,58,237,.5); padding-left: 18px; }
+    .item { margin: 14px 0 22px; }
+    .item small { color: var(--muted); }
+
+    /* Contact */
+    form { display: grid; gap: 12px; }
+    input, textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--text); }
+    textarea { min-height: 140px; resize: vertical; }
+
+    /* Footer */
+    footer { padding: 34px 20px; border-top: 1px solid var(--border); background: rgba(0,0,0,.2); }
+    .social { display: flex; gap: 10px; }
+    .social a { display: inline-flex; padding: 8px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(12px); transition: .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a href="#home" class="brand" aria-label="Home">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Shivangi Shukla</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+      <nav class="links" id="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow">Data Analyst • SQL • Python • Power BI</div>
+          <h1>Turning messy data into clear, actionable stories.</h1>
+          <p class="lead">I analyze, model, and visualize data to help teams move faster. I’ve worked across Azure Synapse, ADF pipelines, T‑SQL/BigQuery, and build interactive dashboards in Power BI.</p>
+          <div class="cta">
+            <a class="btn primary" href="#projects">View Projects →</a>
+            <a class="btn ghost" href="#contact">Contact Me</a>
+            <a class="btn ghost" href="c:\Users\Shivangi\Downloads\Portfolio\ShivangiShukla.pdf" download>Download Resume</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>2+ yrs</strong><span>Analytics & BI</span></div>
+            <div class="stat"><strong>30%</strong><span>Faster Queries</span></div>
+            <div class="stat"><strong>40%</strong><span>Faster Insights</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3 style="margin:0 0 8px;">What I do</h3>
+          <ul class="lead" style="margin:0 0 6px 18px;">
+            <li>Design data models & pipelines (Azure Synapse, ADF).</li>
+            <li>Optimize SQL (T‑SQL, BigQuery) & PySpark ETL.</li>
+            <li>Build KPI dashboards in Power BI.</li>
+          </ul>
+          <p class="lead" style="color:var(--muted); margin:.5rem 0 0;">Open to Data Analyst / BI roles.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <div class="container about">
+        <div class="card">
+          <h2>About</h2>
+          <p>Hi! I’m Shivangi. I love solving business problems with data—cleaning, modeling, visualizing, and sharing clear insights. I’ve worked on Azure (Synapse, ADF), optimized SQL, and built Power BI dashboards with drill‑through and KPIs.</p>
+          <ul>
+            <li>MCA, NIT Jamshedpur</li>
+            <li>Associate Data Engineer @ Neal Analytics (1.4 yrs)</li>
+            <li>Strengths: curiosity, clarity, and shipping useful dashboards</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Highlights</h2>
+          <ul>
+            <li>Cut query times by 25% via T‑SQL tuning & indexing.</li>
+            <li>Built Power BI dashboards accelerating decisions by 40%.</li>
+            <li>Designed ADF pipelines & Synapse models for analytics.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="reveal">
+      <div class="container">
+        <h2>Skills by Category</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Programming</h3>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">PySpark</span>
+              <span class="tag">Shell</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h3>Databases & SQL</h3>
+            <div class="tags">
+              <span class="tag">T‑SQL</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Azure Synapse</span>
+              <span class="tag">KQL</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h3>Visualization</h3>
+            <div class="tags">
+              <span class="tag">Power BI</span>
+              <span class="tag">Tableau</span>
+              <span class="tag">Excel</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h3>Data Engineering</h3>
+            <div class="tags">
+              <span class="tag">ADF</span>
+              <span class="tag">ETL / Pipelines</span>
+              <span class="tag">Data Modeling</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h3>Cloud & Tools</h3>
+            <div class="tags">
+              <span class="tag">Azure</span>
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">Jupyter</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h3>Domain</h3>
+            <div class="tags">
+              <span class="tag">E‑commerce</span>
+              <span class="tag">Banking / AML</span>
+              <span class="tag">Insurance</span>
+              <span class="tag">Ops Analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <article class="project">
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 600 200" width="100%" height="100%" role="img" aria-label="Placeholder">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#06b6d4"/>
+                  </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#g1)" opacity="0.18"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#e5e7eb" font-size="22" font-weight="700">SQL Optimization Dashboard</text>
+              </svg>
+            </div>
+            <div class="body">
+              <h3>Query Performance Tuning</h3>
+              <p>Reduced T‑SQL runtime by 25% via indexing, CTE refactors, and execution plan analysis. Built a Power BI view to track improvements.</p>
+            </div>
+            <div class="actions">
+              <a class="btn ghost" href="#" target="_blank" rel="noreferrer">Case Study</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 600 200" width="100%" height="100%">
+                <rect width="100%" height="100%" fill="#06b6d4" opacity="0.15"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#e5e7eb" font-size="22" font-weight="700">ADF + Synapse Pipeline</text>
+              </svg>
+            </div>
+            <div class="body">
+              <h3>Sales Analytics Pipeline</h3>
+              <p>Designed an ELT pipeline in ADF to ingest raw sales, model it in Synapse, and publish DAX‑powered KPIs to Power BI.</p>
+            </div>
+            <div class="actions">
+              <a class="btn ghost" href="#" target="_blank" rel="noreferrer">Architecture</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noreferrer">Repo</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="thumb" aria-hidden="true">
+              <svg viewBox="0 0 600 200" width="100%" height="100%">
+                <rect width="100%" height="100%" fill="#7c3aed" opacity="0.15"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#e5e7eb" font-size="22" font-weight="700">Borrower Repayment Behavior</text>
+              </svg>
+            </div>
+            <div class="body">
+              <h3>EMI Analysis Dashboard</h3>
+              <p>Analyzed borrower repayment data (loan amount, duration, interest rate, EMI pending, bounce cases, and residency state). Identified patterns in late payments and default risk. Built Power BI visuals to track repayment trends and delinquency rates.</p>
+            </div>
+            <div class="actions">
+              <a class="btn ghost" href="#" target="_blank" rel="noreferrer">Notebook</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noreferrer">Dashboard</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" class="resume reveal">
+      <div class="container">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="item">
+            <h3>Associate Data Engineer • Neal Analytics</h3>
+            <small>1.4 yrs • Azure Synapse, ADF, T‑SQL, Power BI</small>
+            <p>Developed Synapse models, optimized queries, built interactive dashboards, and documented DR & governance with Azure Purview.</p>
+          </div>
+          <div class="item">
+            <h3>Freelance Data Analyst · Self-Employed</h3>
+            <small>2023 – 2024 · SQL, Python, Power BI, Excel</small>
+            <p>Delivered freelance projects involving data cleaning, dashboard creation, and insights reporting. 
+              Worked with small businesses to improve decision-making through automated reports and data visualization.</p>
+          </div>
+          <div class="item">
+            <h3>MCA • NIT Jamshedpur</h3>
+            <small>Foundations in data structures, databases, and software engineering</small>
+          </div>
+        </div>
+        <div class="cta"><a class="btn primary" href="c:\Users\Shivangi\Downloads\Portfolio\ShivangiShukla.pdf" download>Download full Resume</a></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <div class="container">
+        <h2>Contact</h2>
+        <div style="height:14px"></div>
+        <div class="social">
+          <a aria-label="GitHub" href="https://github.com/Shivangi20796" target="_blank" rel="noreferrer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.03c-3.34.73-4.03-1.61-4.03-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.1-.76.08-.75.08-.75 1.22.09 1.87 1.26 1.87 1.26 1.08 1.86 2.83 1.32 3.52 1.01.11-.8.42-1.32.76-1.62-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.4 1.24-3.25-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.85 1.23 1.93 1.23 3.25 0 4.63-2.8 5.66-5.48 5.95.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.83.57A12 12 0 0 0 12 .5Z"/></svg>
+          </a>
+          <a aria-label="LinkedIn" href="https://www.linkedin.com/in/shivangi-shukla-a7135a179/" target="_blank" rel="noreferrer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 0 0 5.001 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3zM14.5 9A5.507 5.507 0 0 0 9 14.5V21h4v-6.5a2.5 2.5 0 0 1 5 0V21h4v-7.5A5.507 5.507 0 0 0 14.5 9Z"/></svg>
+          </a>
+          <a aria-label="Email" href="mailto:shivangishukla2307@gmail.com">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v.4l-10 6.25L2 6.4V6Zm0 2.91V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.91l-9.4 5.87a2 2 0 0 1-2.2 0L2 8.91Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <small>© <span id="year"></span> Shivangi Shukla. All rights reserved.</small>
+      <small><a href="#home" style="color:var(--muted); text-decoration:none;">Back to top ↑</a></small>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const links = document.getElementById('links');
+    menuBtn.addEventListener('click', () => links.classList.toggle('open'));
+    [...links.querySelectorAll('a')].forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
